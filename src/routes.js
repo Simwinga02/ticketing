@@ -2,7 +2,6 @@ import { Navigate } from 'react-router-dom/';
 import DashboardLayout from 'src/components/DashboardLayout';
 import MainLayout from 'src/components/MainLayout';
 import Account from 'src/pages/Account';
-
 import Login from 'src/pages/Login';
 import NotFound from 'src/pages/NotFound';
 import Register from 'src/pages/Register';
@@ -11,6 +10,7 @@ import Faults from 'src/pages/allfaults';
 import AccountDetails from 'src/pages/AccountDetails';
 import Tickets from './pages/Tickets';
 import CreateTicket from './pages/CreateTicket';
+import ViewTicket from './pages/ViewTicket';
 
 const routes = () => [
   {
@@ -31,6 +31,17 @@ const routes = () => [
     children: [
       { path: 'account', element: <Account /> },
       { path: 'accountdetails', element: <AccountDetails /> },
+      { path: 'register', element: <Register /> },
+      { path: 'settings', element: <Settings /> },
+      { path: '*', element: <Navigate to="/404" /> }
+    ]
+  },
+  {
+    path: 'manager',
+    element: <DashboardLayout />,
+    children: [
+      { path: 'tickets', element: <Tickets /> },
+      { path: 'viewTicket/:id', element: <ViewTicket /> },
       { path: 'register', element: <Register /> },
       { path: 'settings', element: <Settings /> },
       { path: '*', element: <Navigate to="/404" /> }

@@ -17,8 +17,11 @@ import {
   Button
 } from '@material-ui/core';
 import getInitials from 'src/utils/getInitials';
+import { useNavigate } from 'react-router';
 
 const TicketResultList = ({ customers, ...rest }) => {
+  const history = useNavigate();
+
   const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
@@ -127,7 +130,13 @@ const TicketResultList = ({ customers, ...rest }) => {
                   <TableCell>{customer.orgId?.Address}</TableCell>
                   <TableCell>{customer.category?.name}</TableCell>
                   <TableCell>
-                    <Button>More</Button>
+                    <Button
+                      onClick={() =>
+                        history(`/manager/viewTicket/${customer.id}`)
+                      }
+                    >
+                      More
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}

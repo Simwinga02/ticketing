@@ -29,6 +29,12 @@ const Login = () => {
     })
     .required();
 
+  const guests = {
+    admin: navigate('/admin/register', { replace: true }),
+    helpDesk: navigate('/app/tickets', { replace: true }),
+    manager: navigate('/manager/tickets', { replace: true })
+  };
+
   return (
     <>
       <Helmet>
@@ -57,9 +63,8 @@ const Login = () => {
               if (status === 200) {
                 setSession(data);
                 localStorage.setItem('token', data.jwt);
-                data.user?.userType === userType.HelpDesk
-                  ? navigate('/app/tickets', { replace: true })
-                  : navigate('/admin/register', { replace: true });
+                guests[data.user.userType];
+                window.location.reload();
               }
             }}
           >

@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
-import { core } from 'src/utils/axios';
+import authAxios from 'src/utils/axios';
 import { useEffect, useState } from 'react';
 
 const AccountDetails = () => {
@@ -9,7 +9,7 @@ const AccountDetails = () => {
 
   const fetchMe = async () => {
     IsLoading(true);
-    const { data } = await core.get('/users/me');
+    const { data } = await authAxios.get('/users/me');
 
     setUsers(data);
     IsLoading(false);

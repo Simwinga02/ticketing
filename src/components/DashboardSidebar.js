@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -24,6 +24,12 @@ import Logo from './Logo';
 import { userType } from 'src/utils/Constants';
 
 const items = [
+  {
+    href: '/app/tickets',
+    icon: UsersIcon,
+    title: 'Tickets',
+    role: userType.Manager
+  },
   {
     href: '/app/tickets',
     icon: UsersIcon,
@@ -82,14 +88,14 @@ const items = [
 
 const DashboardSidebar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
-  const { user } = useContext(AuthContext);
+  const state = useContext(AuthContext);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
   }, [location.pathname]);
-
+  console.log(state.user);
   const content = (
     <Box
       sx={{
@@ -108,10 +114,10 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
       >
         <Logo />
         <Typography color="textPrimary" variant="h5">
-          {user?.username}
+          {state.user?.username}
         </Typography>
         <Typography color="textSecondary" variant="body2">
-          {user?.Man_Number}
+          {state.user?.Man_Number || ''}
         </Typography>
       </Box>
       <Divider />
@@ -119,7 +125,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
         <List>
           {items.map(
             (item) =>
-              item.role === user?.userType && (
+              item.role === state.user?.userType && (
                 <NavItem
                   href={item.href}
                   key={item.title}

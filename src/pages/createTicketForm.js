@@ -14,7 +14,7 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
-import { core } from 'src/utils/axios';
+import authAxios from 'src/utils/axios';
 
 import { AuthContext } from 'src/utils/context/auth';
 import { useContext, useState, useEffect } from 'react';
@@ -26,11 +26,11 @@ const CreateTicketForm = () => {
   const [cats, setCats] = useState([]);
   const refNumber = Math.floor(100000 + Math.random() * 900000);
   const fetchCats = async () => {
-    const { data } = await core.get('​/tickets');
+    const { data } = await authAxios.get('​/tickets');
     setCats(data);
   };
   const fetchOrgs = async () => {
-    const { data } = await core.get('/customers');
+    const { data } = await authAxios.get('/customers');
     setOrgs(data);
   };
 
@@ -63,7 +63,7 @@ const CreateTicketForm = () => {
               initialValues={schema.cast()}
               onSubmit={async (values) => {
                 console.log(values);
-                const { data, status } = await core.post('/tickets', {
+                const { status } = await authAxios.post('/tickets', {
                   ...values,
                   Ref: refNumber.toString(),
                   status: 'Pending'

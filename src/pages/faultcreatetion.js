@@ -12,7 +12,7 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
-import { core } from 'src/utils/axios';
+import authAxios from 'src/utils/axios';
 
 import { AuthContext } from 'src/utils/context/auth';
 import { useContext, useState, useEffect } from 'react';
@@ -26,14 +26,20 @@ const Docate = () => {
 
   const schema = Yup.object().shape({
     issue: Yup.string().max(255).required('Issue is required'),
-    customerName: Yup.string().max(255).required('Customer FullName is required'),
+    customerName: Yup.string()
+      .max(255)
+      .required('Customer FullName is required'),
     customerEmail: Yup.string().max(255).required('Email is required'),
     customerOrg: Yup.string().max(255).required('Organization/Nil is required'),
     customerPhone: Yup.string().max(255).required('Phone Number is required'),
     assignedTo: Yup.string().max(255).required('Assigned To is required'),
     status: Yup.string().max().required('Status is required'),
-    description: Yup.string().max(255).required('Description on Duty is required'),
-    customerAddress: Yup.string().max(255).required('Customer Address is required')
+    description: Yup.string()
+      .max(255)
+      .required('Description on Duty is required'),
+    customerAddress: Yup.string()
+      .max(255)
+      .required('Customer Address is required')
   });
   const initializer = async () => {
     const { data } = await core.get('/users/me');
@@ -44,7 +50,7 @@ const Docate = () => {
   useEffect(() => {
     initializer();
   }, []);
-  
+
   if (loading) {
     return <h1>loading.....</h1>;
   }

@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
 import CustomerListResults from 'src/components/customer/CustomerListResults';
 import CustomerListToolbar from 'src/components/customer/CustomerListToolbar';
-import { core } from 'src/utils/axios';
+import authAxios from 'src/utils/axios';
 import { useEffect, useState, Fragment } from 'react';
 import { ContentPasteOutlined } from '@material-ui/icons';
 

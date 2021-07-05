@@ -7,9 +7,8 @@ import theme from 'src/theme';
 import routes from 'src/routes';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { isEmpty } from 'lodash';
 import { AuthContext } from './utils/context/auth';
-import { core } from './utils/axios';
+import authAxios from './utils/axios';
 
 axios.defaults.baseURL = 'http://localhost:1337';
 
@@ -23,7 +22,7 @@ const App = () => {
 
   const initializer = async () => {
     try {
-      const { data } = await core.get('/users/me');
+      const { data } = await authAxios.get('/users/me');
       setSession({
         ...session,
         user: data

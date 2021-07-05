@@ -7,7 +7,7 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
-import { core } from 'src/utils/axios';
+import authAxios from 'src/utils/axios';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import Logo from '../Logo';
@@ -23,7 +23,7 @@ const SettingsPassword = () => {
   const [id, setID] = useState(false);
   const [datas, setData] = useState(false);
   const initializer = async () => {
-    const { data } = await core.get('/users/me');
+    const { data } = await authAxios.get('/users/me');
 
     setSession({
       ...session,
@@ -50,7 +50,7 @@ const SettingsPassword = () => {
         initialValues={schema.cast()}
         validationSchema={schema}
         onSubmit={async (values) => {
-          const { data } = await core.put(`/users/${id}`, {
+          const { data } = await authAxios.put(`/users/${id}`, {
             password: values.password
           });
 

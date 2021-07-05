@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
-import { core } from 'src/utils/axios';
+import authAxios from 'src/utils/axios';
 import { useEffect, useState } from 'react';
 
 const Complaints = () => {

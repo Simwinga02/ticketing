@@ -1,7 +1,9 @@
+/* eslint-disable import/no-named-as-default */
 import { Navigate } from 'react-router-dom/';
 import DashboardLayout from 'src/components/DashboardLayout';
 import MainLayout from 'src/components/MainLayout';
 import Account from 'src/pages/Account';
+// eslint-disable-next-line import/no-named-as-default-member
 import Login from 'src/pages/Login';
 import NotFound from 'src/pages/NotFound';
 import Register from 'src/pages/Register';
@@ -42,7 +44,16 @@ const routes = () => [
     children: [
       { path: 'tickets', element: <Tickets /> },
       { path: 'viewTicket/:id', element: <ViewTicket /> },
-      { path: 'register', element: <Register /> },
+      { path: 'settings', element: <Settings /> },
+      { path: '*', element: <Navigate to="/404" /> }
+    ]
+  },
+  {
+    path: 'technician',
+    element: <DashboardLayout />,
+    children: [
+      { path: 'tickets', element: <Tickets /> },
+      { path: 'viewTicket/:id', element: <ViewTicket /> },
       { path: 'settings', element: <Settings /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
@@ -53,6 +64,7 @@ const routes = () => [
     children: [
       { path: '404', element: <NotFound /> },
       { path: '/', element: <Login /> },
+      // { path: '/', element: <Navigate to="/app/tickets" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }

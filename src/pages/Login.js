@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from 'src/utils/context/auth';
-import axios from 'axios';
 import { userType } from 'src/utils/Constants';
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,11 +29,25 @@ const Login = () => {
     })
     .required();
 
-  const guests = {
-    admin: navigate('/admin/register', { replace: true }),
-    helpDesk: navigate('/app/tickets', { replace: true }),
-    manager: navigate('/manager/tickets', { replace: true })
-  };
+  function RouteTo(type) {
+    switch (type) {
+      case userType.Admin:
+        navigate('/admin/tickets', { replace: true });
+        break;
+      case userType.HelpDesk:
+        navigate('/app/tickets', { replace: true });
+        break;
+      case userType.Manager:
+        navigate('/manager/tickets', { replace: true });
+        break;
+      case userType.Technician:
+        navigate('/technician/tickets', { replace: true });
+        break;
+
+      default:
+        break;
+    }
+  }
 
   return (
     <>
@@ -63,7 +77,7 @@ const Login = () => {
               if (status === 200) {
                 setSession(data);
                 localStorage.setItem('token', data.jwt);
-                guests[data.user.userType];
+                RouteTo(data.user.userType);
                 window.location.reload();
               }
             }}

@@ -1,0 +1,102 @@
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
+import authAxios from 'src/utils/axios';
+import {
+  Card,
+  Typography,
+  CardContent,
+  Grid,
+  Container,
+  Box,
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  TextField
+} from '@material-ui/core';
+import { TicketPriority, userType } from 'src/utils/Constants';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+export default function AssignTechnician() {
+  const navigate = useNavigate();
+  const [technicians, setTechnician] = useState([]);
+  const fetchTechnicians = async () => {
+    const { data } = await authAxios.get(
+      `/users?userType=${userType.Technician}`
+    );
+    setTechnician(data);
+  };
+
+  const schema = Yup.object({
+    AssignedTo: Yup.string().default('').required()
+  }).required();
+
+  useEffect(() => {
+    fetchTechnicians();
+  }, []);
+
+  return (
+    <Card>
+      <Typography gutterBottom variant="h1" component="h2" color="black" p={3}>
+        Ticket Assignment
+      </Typography>
+      <Container maxWidth="md">
+        <Formik
+          initialValues={schema.cast()}
+          onSubmit={async (values) => {
+            console.log(values);
+            const { status } = await authAxios.put(
+              `/tickets/${ticketId}`,
+              values
+            );
+            if (status === 200) {
+              navigate('/manager/tickets', { replace: true });
+            }
+          }}
+        >
+          {({ handleChange, handleSubmit, isSubmitting, values }) => (
+            <form onSubmit={handleSubmit}>
+              <Box mt={3}>
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel id="demo-simple-select-outlined-label">
+                    Technician
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="demo-simple-select-outlined"
+                    value={values.AssignedTo}
+                    name="AssignedTo"
+                    onChange={handleChange}
+                    label="Technician"
+                  >
+                    {technicians.map((category) => (
+                      <MenuItem value={category.id}>
+                        {category.username}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+
+              <Box sx={{ py: 2 }}>
+                <Button
+                  color="primary"
+                  disabled={isSubmitting}
+                  fullWidth
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                >
+                  submit
+                </Button>
+              </Box>
+            </form>
+          )}
+        </Formik>
+      </Container>
+    </Card>
+  );
+}

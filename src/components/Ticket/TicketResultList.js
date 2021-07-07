@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
-  Avatar,
   Box,
   Card,
   Checkbox,
@@ -16,7 +14,6 @@ import {
   Typography,
   Button
 } from '@material-ui/core';
-import getInitials from 'src/utils/getInitials';
 import { useNavigate } from 'react-router';
 
 const TicketResultList = ({ customers, ...rest }) => {

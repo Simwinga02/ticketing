@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import authAxios from 'src/utils/axios';
 import {
@@ -19,11 +19,14 @@ import {
 import { TicketPriority, userType } from 'src/utils/Constants';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import AssignTechnician from './AssignTechnician';
+import { AuthContext } from 'src/utils/context/auth';
 
 export default function TicketDetails({ ticketId }) {
   const navigate = useNavigate();
   const [ticket, setTicket] = useState();
   const [technicians, setTechnician] = useState([]);
+  const { user } = useContext(AuthContext);
   const fetchTicket = async () => {
     const { data } = await authAxios.get(`/tickets/${ticketId}`);
     setTicket(data);
@@ -184,7 +187,10 @@ export default function TicketDetails({ ticketId }) {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item lg={4} md={3} xs={12}></Grid>
+          <Grid item lg={4} md={3} xs={12}>
+            {user.userType === userType.Manager ||
+              (user.userType === userType.Admin && <AssignTechnician />)}
+          </Grid>
         </Grid>
       </Container>
     </>

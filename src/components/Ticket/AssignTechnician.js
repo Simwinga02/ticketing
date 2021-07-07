@@ -5,22 +5,19 @@ import authAxios from 'src/utils/axios';
 import {
   Card,
   Typography,
-  CardContent,
-  Grid,
   Container,
   Box,
   Button,
   FormControl,
   InputLabel,
   Select,
-  MenuItem,
-  TextField
+  MenuItem
 } from '@material-ui/core';
-import { TicketPriority, userType } from 'src/utils/Constants';
+import { userType } from 'src/utils/Constants';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-export default function AssignTechnician() {
+export default function AssignTechnician({ ticketId }) {
   const navigate = useNavigate();
   const [technicians, setTechnician] = useState([]);
   const fetchTechnicians = async () => {

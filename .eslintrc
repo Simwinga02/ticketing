@@ -39,6 +39,7 @@
     "object-curly": "off",
     "arrow-body-style": "off",
     "object-curly-newline": "off",
-    "react/jsx-curly-newline": "off"
+    "react/jsx-curly-newline": "off",
+    "no-irregular-whitespace": "off"
   }
 }

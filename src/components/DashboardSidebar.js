@@ -25,10 +25,16 @@ import { userType } from 'src/utils/Constants';
 
 const items = [
   {
-    href: '/app/tickets',
+    href: '/manager/tickets',
     icon: UsersIcon,
     title: 'Tickets',
     role: userType.Manager
+  },
+  {
+    href: '/technician/tickets',
+    icon: UsersIcon,
+    title: 'Tickets',
+    role: userType.Technician
   },
   {
     href: '/app/tickets',

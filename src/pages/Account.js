@@ -1,10 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { Box, Container } from '@material-ui/core';
-import CustomerListResults from 'src/components/customer/CustomerListResults';
-import CustomerListToolbar from 'src/components/customer/CustomerListToolbar';
+import { useEffect, useState } from 'react';
 import authAxios from 'src/utils/axios';
-import { useEffect, useState, Fragment } from 'react';
-import { ContentPasteOutlined } from '@material-ui/icons';
 
 const Accounts = () => {
   const [loading, IsLoading] = useState(false);
@@ -12,7 +9,7 @@ const Accounts = () => {
 
   const fetchUsers = async () => {
     IsLoading(true);
-    const { data } = await core.get('/users');
+    const { data } = await authAxios.get('/users');
     setUsers(data);
     IsLoading(false);
   };
@@ -39,9 +36,9 @@ const Accounts = () => {
   ));
   console.log(ListData);
 
-  // if (loading) {
-  //   return <h1>loading.....</h1>;
-  // }
+  if (loading) {
+    return <h1>loading.....</h1>;
+  }
   return (
     <>
       <Helmet>

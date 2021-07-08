@@ -15,27 +15,25 @@ import {
   InputLabel
 } from '@material-ui/core';
 import authAxios from 'src/utils/axios';
-
-import { AuthContext } from 'src/utils/context/auth';
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const CreateTicketForm = () => {
   const navigate = useNavigate();
-  const { setSession } = useContext(AuthContext);
+  // const { setSession } = useContext(AuthContext);
   const [orgs, setOrgs] = useState([]);
-  const [cats, setCats] = useState([]);
+  // const [cats, setCats] = useState([]);
   const refNumber = Math.floor(100000 + Math.random() * 900000);
-  const fetchCats = async () => {
-    const { data } = await authAxios.get('​/tickets');
-    setCats(data);
-  };
+  // const fetchCats = async () => {
+  //   const { data } = await authAxios.get('​/tickets');
+  //   setCats(data);
+  // };
   const fetchOrgs = async () => {
     const { data } = await authAxios.get('/customers');
     setOrgs(data);
   };
 
   useEffect(() => {
-    fetchCats();
+    // fetchCats();
     fetchOrgs();
   }, []);
 

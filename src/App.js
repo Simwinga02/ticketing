@@ -38,7 +38,7 @@ const App = () => {
   }, []);
 
   const routing = useRoutes(routes());
-  console.log('the user', session?.user?.userType);
+
   if (!isInitialised) {
     return <h1>loading....</h1>;
   }

@@ -9,7 +9,7 @@ const Complaints = () => {
 
   const fetchCrimes = async () => {
     IsLoading(true);
-    const { data } = await core.get('/tickets');
+    const { data } = await authAxios.get('/tickets');
     setData(data);
     IsLoading(false);
   };

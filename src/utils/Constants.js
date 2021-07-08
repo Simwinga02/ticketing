@@ -2,7 +2,7 @@ export const userType = {
   Admin: 'admin',
   HelpDesk: 'helpDesk',
   Manager: 'manager',
-  Technican: 'Technician'
+  Technician: 'Technician'
 };
 
 export const TicketPriority = {

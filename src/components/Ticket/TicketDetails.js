@@ -8,16 +8,10 @@ import {
   CardContent,
   Grid,
   Container,
-  Box,
-  Button,
-  FormControl,
   InputLabel,
-  Select,
-  MenuItem,
   TextField
 } from '@material-ui/core';
 import { TicketPriority, userType } from 'src/utils/Constants';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
 import AssignTechnician from './AssignTechnician';
 import { AuthContext } from 'src/utils/context/auth';

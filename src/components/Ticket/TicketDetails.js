@@ -17,7 +17,7 @@ import AssignTechnician from './AssignTechnician';
 import { AuthContext } from 'src/utils/context/auth';
 
 export default function TicketDetails({ ticketId }) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [ticket, setTicket] = useState();
   const [technicians, setTechnician] = useState([]);
   const { user } = useContext(AuthContext);

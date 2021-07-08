@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router';
 import authAxios from 'src/utils/axios';
 import {
   Card,
@@ -14,28 +13,17 @@ import {
 import { TicketPriority, userType } from 'src/utils/Constants';
 import * as Yup from 'yup';
 import AssignTechnician from './AssignTechnician';
+import ResolveTicket from './ResolveTicket';
 import { AuthContext } from 'src/utils/context/auth';
 
 export default function TicketDetails({ ticketId }) {
   // const navigate = useNavigate();
   const [ticket, setTicket] = useState();
-  const [technicians, setTechnician] = useState([]);
   const { user } = useContext(AuthContext);
   const fetchTicket = async () => {
     const { data } = await authAxios.get(`/tickets/${ticketId}`);
     setTicket(data);
   };
-
-  const fetchTechnicians = async () => {
-    const { data } = await authAxios.get(
-      `/users?userType=${userType.Technician}`
-    );
-    setTechnician(data);
-  };
-
-  const schema = Yup.object({
-    AssignedTo: Yup.string().default('').required()
-  }).required();
 
   useEffect(() => {
     fetchTicket();
@@ -184,6 +172,9 @@ export default function TicketDetails({ ticketId }) {
           <Grid item lg={4} md={3} xs={12}>
             {user.userType === userType.Manager && (
               <AssignTechnician ticketId={ticketId} />
+            )}
+            {user.userType === userType.Technician && (
+              <ResolveTicket ticketId={ticketId} />
             )}
           </Grid>
         </Grid>

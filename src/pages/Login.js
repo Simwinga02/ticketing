@@ -32,7 +32,7 @@ const Login = () => {
   function RouteTo(type) {
     switch (type) {
       case userType.Admin:
-        navigate('/admin/tickets', { replace: true });
+        navigate('/admin/register', { replace: true });
         break;
       case userType.HelpDesk:
         navigate('/app/tickets', { replace: true });

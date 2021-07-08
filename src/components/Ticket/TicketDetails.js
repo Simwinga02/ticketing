@@ -11,10 +11,12 @@ import {
   TextField
 } from '@material-ui/core';
 import { TicketPriority, userType } from 'src/utils/Constants';
+import * as Yup from 'yup';
 import AssignTechnician from './AssignTechnician';
 import { AuthContext } from 'src/utils/context/auth';
 
 export default function TicketDetails({ ticketId }) {
+  // const navigate = useNavigate();
   const [ticket, setTicket] = useState();
   const { user } = useContext(AuthContext);
   const fetchTicket = async () => {
@@ -167,8 +169,9 @@ export default function TicketDetails({ ticketId }) {
             </Card>
           </Grid>
           <Grid item lg={4} md={3} xs={12}>
-            {user.userType === userType.Manager ||
-              (user.userType === userType.Admin && <AssignTechnician />)}
+            {user.userType === userType.Manager && (
+              <AssignTechnician ticketId={ticketId} />
+            )}
           </Grid>
         </Grid>
       </Container>

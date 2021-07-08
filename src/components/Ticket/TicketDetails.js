@@ -182,8 +182,9 @@ export default function TicketDetails({ ticketId }) {
             </Card>
           </Grid>
           <Grid item lg={4} md={3} xs={12}>
-            {user.userType === userType.Manager ||
-              (user.userType === userType.Admin && <AssignTechnician />)}
+            {user.userType === userType.Manager && (
+              <AssignTechnician ticketId={ticketId} />
+            )}
           </Grid>
         </Grid>
       </Container>

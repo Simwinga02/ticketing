@@ -13,6 +13,7 @@ import {
 import { TicketPriority, userType } from 'src/utils/Constants';
 import * as Yup from 'yup';
 import AssignTechnician from './AssignTechnician';
+import ResolveTicket from './ResolveTicket';
 import { AuthContext } from 'src/utils/context/auth';
 
 export default function TicketDetails({ ticketId }) {
@@ -171,6 +172,9 @@ export default function TicketDetails({ ticketId }) {
           <Grid item lg={4} md={3} xs={12}>
             {user.userType === userType.Manager && (
               <AssignTechnician ticketId={ticketId} />
+            )}
+            {user.userType === userType.Technician && (
+              <ResolveTicket ticketId={ticketId} />
             )}
           </Grid>
         </Grid>

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
 import authAxios from 'src/utils/axios';
 import {
@@ -13,7 +13,6 @@ import {
   Select,
   MenuItem
 } from '@material-ui/core';
-import { userType } from 'src/utils/Constants';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -48,15 +47,15 @@ export default function ResolveTicket({ ticketId }) {
               <Box mt={3}>
                 <FormControl variant="outlined" fullWidth>
                   <InputLabel id="demo-simple-select-outlined-label">
-                    Technician
+                    Status
                   </InputLabel>
                   <Select
                     labelId="demo-simple-select-outlined-label"
                     id="demo-simple-select-outlined"
-                    value={values.AssignedTo}
-                    name="AssignedTo"
+                    value={values.status}
+                    name="status"
                     onChange={handleChange}
-                    label="Technician"
+                    label="status"
                   >
                     <MenuItem value="Completed">Completed</MenuItem>
                     <MenuItem value="Blocked">Blocked</MenuItem>

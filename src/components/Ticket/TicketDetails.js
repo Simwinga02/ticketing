@@ -11,7 +11,6 @@ import {
   TextField
 } from '@material-ui/core';
 import { TicketPriority, userType } from 'src/utils/Constants';
-import * as Yup from 'yup';
 import AssignTechnician from './AssignTechnician';
 import ResolveTicket from './ResolveTicket';
 import { AuthContext } from 'src/utils/context/auth';
@@ -27,6 +26,7 @@ export default function TicketDetails({ ticketId }) {
 
   useEffect(() => {
     fetchTicket();
+    // fetchTechnicians();
   }, []);
 
   return (

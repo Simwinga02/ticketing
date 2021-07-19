@@ -13,15 +13,13 @@ import { Formik } from 'formik';
 
 const SettingsPassword = () => {
   const navigate = useNavigate();
-  const [initialised, setInitialised] = useState(false);
-  
+
   const [session, setSession] = useState({
     setSession: (newSession) => {
       setSession({ ...session, newSession });
     }
   });
   const [id, setID] = useState(false);
-  const [datas, setData] = useState([]);
   const initializer = async () => {
     const { data } = await authAxios.get('/users/me');
 
@@ -30,10 +28,8 @@ const SettingsPassword = () => {
       user: data
     });
     setID(data.id);
-    setData(data);
-    setInitialised(true);
   };
-  
+
   const schema = Yup.object()
     .shape({
       password: Yup.string().max(255).required('Password is required')

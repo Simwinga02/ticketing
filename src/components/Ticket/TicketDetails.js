@@ -27,7 +27,6 @@ export default function TicketDetails({ ticketId }) {
 
   useEffect(() => {
     fetchTicket();
-    fetchTechnicians();
   }, []);
 
   return (

@@ -44,12 +44,18 @@ export default function AssignTechnician({ ticketId }) {
         <Formik
           initialValues={schema.cast()}
           onSubmit={async (values) => {
-            console.log(values);
+            const user = technicians.find(tech => tech.id === values.AssignedTo)
             const { status } = await authAxios.put(
               `/tickets/${ticketId}`,
               values
             );
             if (status === 200) {
+              await authAxios.post(`https://africaistalkingbulksmsapi.azurewebsites.net/api/BulkSms?code=${process.env.REACT_APP_API_CODE}`, {
+                key: process.env.REACT_APP_API_KEY,
+                username: process.env.REACT_APP_USERNAME,
+                to: user.Phone,
+                message: ' A ticket has been assigned to you. Please log into the portal'
+              })
               navigate('/manager/tickets', { replace: true });
             }
           }}

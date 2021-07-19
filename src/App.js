@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 import { AuthContext } from './utils/context/auth';
 import authAxios from './utils/axios';
 
-axios.defaults.baseURL = 'http://localhost:1337';
+axios.defaults.baseURL = process.env.REACT_APP_SERVER;
 
 const App = () => {
   const [isInitialised, setInitialised] = useState(false);

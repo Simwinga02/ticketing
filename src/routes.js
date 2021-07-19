@@ -13,6 +13,7 @@ import AccountDetails from 'src/pages/AccountDetails';
 import Tickets from './pages/Tickets';
 import CreateTicket from './pages/CreateTicket';
 import ViewTicket from './pages/ViewTicket';
+import Search from './pages/Search';
 
 const routes = () => [
   {
@@ -22,6 +23,7 @@ const routes = () => [
       { path: 'tickets', element: <Tickets /> },
       { path: 'accountdetails', element: <AccountDetails /> },
       { path: 'faults', element: <Faults /> },
+      { path: 'search', element: <Search /> },
       { path: 'create', element: <CreateTicket /> },
       { path: 'settings', element: <Settings /> },
       { path: '*', element: <Navigate to="/404" /> }
